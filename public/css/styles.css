@@ -1,0 +1,1983 @@
+/* NeuraLink Cyber Theme - Modern Trading UI */
+
+:root {
+    /* Default: Dark institutional desk */
+    --cyber-bg: #05070b;
+    --cyber-bg-light: #0b0f16;
+    --cyber-bg-card: #11161f;
+    --cyber-purple: #64748b;
+    --cyber-blue: #38bdf8;
+    --cyber-pink: #e11d48;  /* primary action / alerts */
+    --cyber-green: #22c55e; /* positive P&L only */
+    --cyber-text: #e5e7eb;
+    --cyber-text-dim: #9ca3af;
+    --cyber-border: rgba(148, 163, 184, 0.35);
+    --cyber-glow: rgba(15, 23, 42, 0.7);
+}
+
+/* Light mode – neutral, muted, no pure white flashbang */
+:root.theme-light {
+    --cyber-bg: #f3f4f6;
+    --cyber-bg-light: #e5e7eb;
+    --cyber-bg-card: #ffffff;
+    --cyber-purple: #4b5563;
+    --cyber-blue: #2563eb;
+    --cyber-pink: #b91c1c;
+    --cyber-green: #15803d;
+    --cyber-text: #111827;
+    --cyber-text-dim: #6b7280;
+    --cyber-border: rgba(148, 163, 184, 0.7);
+    --cyber-glow: rgba(15, 23, 42, 0.18);
+}
+
+/* Dark Red desk – warmer, red-tinted neutrals */
+:root.theme-dark-red {
+    --cyber-bg: #06040b;
+    --cyber-bg-light: #120713;
+    --cyber-bg-card: #170915;
+    --cyber-purple: #fecaca;
+    --cyber-blue: #f97373;
+    --cyber-pink: #b91c1c;
+    --cyber-green: #22c55e;
+    --cyber-text: #f9fafb;
+    --cyber-text-dim: #e5e7eb;
+    --cyber-border: rgba(239, 68, 68, 0.35);
+    --cyber-glow: rgba(127, 29, 29, 0.7);
+}
+
+/* Classic neon cyber theme (v1 look) */
+:root.theme-classic {
+    --cyber-bg: #0a0e27;
+    --cyber-bg-light: #141837;
+    --cyber-bg-card: #1a1f3a;
+    --cyber-purple: #9d4edd;
+    --cyber-blue: #4cc9f0;
+    --cyber-pink: #f72585;
+    --cyber-green: #06ffa5;
+    --cyber-text: #e0e7ff;
+    --cyber-text-dim: #8892b0;
+    --cyber-border: rgba(77, 201, 240, 0.2);
+    --cyber-glow: rgba(157, 78, 221, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global button reset / modern base */
+button {
+    font-family: inherit;
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+body {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--cyber-bg) 0%, #1a1f3a 100%);
+    color: var(--cyber-text);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, var(--cyber-bg-light) 0%, var(--cyber-bg-card) 100%);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--cyber-border);
+    box-shadow: 0 4px 20px rgba(157, 78, 221, 0.15);
+    position: relative;
+    z-index: 100;
+}
+
+.app-title {
+    font-size: 24px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--cyber-purple) 0%, var(--cyber-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px var(--cyber-glow);
+}
+
+/* Header Right Side */
+.header-right {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Strike Button Grid (Webull-style) */
+#strike-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+.strike-btn {
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    color: var(--cyber-text);
+    padding: 12px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.strike-btn:hover {
+    background: var(--cyber-bg-hover);
+    border-color: var(--cyber-blue);
+    box-shadow: 0 0 8px rgba(6, 255, 165, 0.3);
+    transform: translateY(-2px);
+}
+
+.strike-btn.selected {
+    background: var(--cyber-blue);
+    border-color: var(--cyber-blue);
+    color: #0a0a1a;
+    box-shadow: 0 0 12px rgba(6, 255, 165, 0.6);
+}
+
+.strike-btn.itm {
+    border-color: rgba(0, 200, 83, 0.5);
+}
+
+.strike-btn.itm:hover {
+    border-color: var(--cyber-green);
+    box-shadow: 0 0 8px rgba(0, 200, 83, 0.3);
+}
+
+.strike-btn.otm {
+    border-color: rgba(255, 171, 0, 0.5);
+}
+
+.strike-btn.otm:hover {
+    border-color: #ffab00;
+    box-shadow: 0 0 8px rgba(255, 171, 0, 0.3);
+}
+
+.strike-btn .strike-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--cyber-blue);
+}
+
+.strike-btn.selected .strike-price {
+    color: #0a0a1a;
+}
+
+.strike-btn .strike-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--cyber-text-dim);
+    text-transform: uppercase;
+}
+
+.strike-btn.selected .strike-label {
+    color: #0a0a1a;
+}
+
+.strike-btn .strike-delta {
+    font-size: 9px;
+    color: var(--cyber-text-dim);
+}
+
+.strike-btn.selected .strike-delta {
+    color: rgba(10, 10, 26, 0.8);
+}
+
+#selected-strike-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+#selected-strike-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cyber-blue);
+}
+
+#selected-strike-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cyber-text-dim);
+    text-transform: uppercase;
+}
+
+@media (max-width: 1200px) {
+    .header-right {
+        gap: 8px;
+    }
+    
+    .header-item {
+        font-size: 10px;
+        padding: 4px 6px;
+    }
+    
+    .menu-icon {
+        font-size: 16px;
+    }
+    
+    .network-indicator .status-text {
+        display: none; /* Hide "Network" text on smaller screens */
+    }
+}
+
+.header-item {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    color: var(--cyber-text-dim);
+    padding: 6px 12px;
+    background: var(--cyber-bg-card);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+#market-status {
+    border-color: var(--cyber-border);
+}
+
+#market-state {
+    margin-left: 4px; /* Add space after "Market:" label */
+}
+
+/* Menu Items (clickable) */
+.menu-item {
+    cursor: pointer;
+    position: relative;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+}
+
+.menu-item:hover {
+    background: rgba(77, 201, 240, 0.1);
+    border-color: var(--cyber-border);
+}
+
+.menu-icon {
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.menu-item:hover .menu-icon {
+    transform: scale(1.1);
+}
+
+/* Network Status Indicator */
+.network-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--cyber-green);
+    box-shadow: 0 0 10px var(--cyber-green);
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Price update animations */
+@keyframes pulse-green {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px var(--cyber-green);
+    }
+    50% {
+        transform: scale(1.05);
+        text-shadow: 0 0 15px var(--cyber-green);
+    }
+}
+
+@keyframes pulse-red {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px var(--cyber-pink);
+    }
+    50% {
+        transform: scale(1.05);
+        text-shadow: 0 0 15px var(--cyber-pink);
+    }
+}
+
+@keyframes pulse-calc {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(0, 176, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 176, 255, 0.8);
+    }
+}
+
+/* Strike Slider Styling */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: linear-gradient(90deg, 
+        var(--cyber-green) 0%, 
+        var(--cyber-blue) 50%, 
+        var(--cyber-pink) 100%);
+    border-radius: 4px;
+    outline: none;
+    margin: 12px 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--cyber-blue);
+    border: 2px solid var(--cyber-purple);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--cyber-blue);
+    transition: all 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px var(--cyber-blue);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--cyber-blue);
+    border: 2px solid var(--cyber-purple);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--cyber-blue);
+    transition: all 0.2s;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px var(--cyber-blue);
+}
+
+.status-dot.connecting {
+    background: #ffa726;
+    box-shadow: 0 0 10px #ffa726;
+}
+
+.status-dot.disconnected {
+    background: var(--cyber-pink);
+    box-shadow: 0 0 10px var(--cyber-pink);
+}
+
+/* Dropdown Menus */
+.menu-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 240px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    padding: 8px 0;
+    z-index: 1000;
+    animation: dropdownSlide 0.2s ease;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-header {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cyber-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--cyber-border);
+}
+
+.dropdown-item {
+    padding: 10px 16px;
+    font-size: 12px;
+    color: var(--cyber-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.dropdown-item.clickable {
+    cursor: pointer;
+}
+
+.dropdown-item.clickable:hover {
+    background: rgba(77, 201, 240, 0.1);
+    color: var(--cyber-blue);
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: var(--cyber-border);
+    margin: 4px 0;
+}
+
+.dropdown-item span {
+    font-size: 14px;
+}
+
+.dropdown-item strong {
+    color: var(--cyber-green);
+}
+
+/* Prevent dropdown text wrapping */
+.menu-dropdown {
+    white-space: nowrap;
+}
+
+/* Make dropdowns responsive */
+@media (max-width: 768px) {
+    .menu-dropdown {
+        right: -10px;
+        min-width: 220px;
+    }
+}
+
+.status-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
+.status-badge.disconnected {
+    background: linear-gradient(135deg, #444 0%, #2a2a2a 100%);
+    color: #888;
+}
+
+.status-badge.connecting {
+    background: linear-gradient(135deg, #ffa726 0%, #ff9800 100%);
+    color: #000;
+    animation: pulse 1.5s infinite;
+}
+
+.status-badge.connected {
+    background: linear-gradient(135deg, var(--cyber-green) 0%, #00ff88 100%);
+    color: #000;
+    box-shadow: 0 0 20px rgba(6, 255, 165, 0.5);
+}
+
+.status-badge.error {
+    background: linear-gradient(135deg, var(--cyber-pink) 0%, #ff0066 100%);
+    color: #fff;
+}
+
+/* Trading Mode Badge */
+.trading-mode-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.trading-mode-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+.trading-mode-badge.paper-mode {
+    background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
+    color: #000;
+    box-shadow: 0 0 20px rgba(79, 195, 247, 0.4);
+}
+
+.trading-mode-badge.paper-mode:hover {
+    box-shadow: 0 0 30px rgba(79, 195, 247, 0.7);
+}
+
+.trading-mode-badge.real-mode {
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
+    animation: pulse-real 2s infinite;
+}
+
+.trading-mode-badge.real-mode:hover {
+    box-shadow: 0 0 35px rgba(255, 68, 68, 0.9);
+}
+
+.trading-mode-badge .mode-icon {
+    font-size: 11px;
+    line-height: 1;
+}
+
+.trading-mode-badge .mode-text {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1;
+}
+
+@keyframes pulse-real {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 68, 68, 1);
+    }
+}
+
+/* Mode Switcher Buttons */
+.mode-btn {
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid transparent;
+    background: var(--cyber-bg-card);
+    color: var(--cyber-text-dim);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+    background: rgba(77, 201, 240, 0.1);
+    border-color: var(--cyber-blue);
+}
+
+.mode-btn.active {
+    background: linear-gradient(135deg, var(--cyber-purple) 0%, var(--cyber-blue) 100%);
+    border-color: var(--cyber-blue);
+    color: #000;
+    font-weight: 900;
+    box-shadow: 0 2px 10px var(--cyber-glow);
+}
+
+.mode-btn[data-mode="real"].active {
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    border-color: #ff6666;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(255, 68, 68, 0.5);
+}
+
+#market-status {
+    font-size: 11px;
+    color: var(--cyber-text-dim);
+    padding: 4px 8px;
+    background: var(--cyber-bg-card);
+    border-radius: 12px;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-width: 0; /* Allow flex items to shrink below their min-content */
+    min-height: 0; /* Allow flex items to shrink vertically */
+}
+
+/* Full Settings Modal - Old Money Style */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: var(--cyber-bg-card);
+    border: 2px solid var(--cyber-border);
+    border-radius: 12px;
+    padding: 0;
+    width: 900px;
+    max-width: 95%;
+    max-height: 85vh;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 32px;
+    border-bottom: 2px solid var(--cyber-border);
+    background: var(--cyber-bg-light);
+}
+
+.modal-header h2 {
+    font-size: 22px;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--cyber-text);
+}
+
+.modal-close-btn {
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    color: var(--cyber-text);
+    font-size: 20px;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+    background: var(--cyber-bg);
+    border-color: var(--cyber-blue);
+    color: var(--cyber-blue);
+}
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 32px;
+    overflow-y: auto;
+}
+
+.settings-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-section {
+    margin-bottom: 32px;
+}
+
+.settings-section:last-child {
+    margin-bottom: 0;
+}
+
+.settings-section h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: var(--cyber-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--cyber-border);
+}
+
+.settings-section p {
+    font-size: 11px;
+    color: var(--cyber-text-dim);
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.hotkey-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.hotkey-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.hotkey-row label {
+    font-size: 12px;
+    color: var(--cyber-text);
+    font-weight: 500;
+}
+
+.hotkey-input {
+    width: 80px;
+    padding: 6px 10px;
+    text-align: center;
+    background: var(--cyber-bg);
+    border: 1px solid var(--cyber-border);
+    border-radius: 6px;
+    color: var(--cyber-text);
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.hotkey-input:hover {
+    border-color: var(--cyber-blue);
+    background: var(--cyber-bg-light);
+}
+
+.color-input {
+    width: 80px;
+    height: 36px;
+    padding: 4px;
+    background: var(--cyber-bg);
+    border: 1px solid var(--cyber-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.color-input:hover {
+    border-color: var(--cyber-blue);
+}
+
+.hotkey-clear-btn {
+    background: var(--cyber-bg);
+    border: 1px solid var(--cyber-border);
+    color: var(--cyber-text-dim);
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.hotkey-clear-btn:hover {
+    background: var(--cyber-bg-light);
+    border-color: var(--cyber-pink);
+    color: var(--cyber-pink);
+}
+
+.settings-section .toolbar-btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 10px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Sidebar / Watchlist */
+.sidebar {
+    width: 220px;
+    background: var(--cyber-bg-light);
+    border-right: 2px solid var(--cyber-border);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+}
+
+.watchlist-header {
+    padding: 16px 12px;
+    font-size: 12px;
+    color: var(--cyber-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--cyber-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.watchlist-add-btn {
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--cyber-border);
+    background: var(--cyber-bg-card);
+    color: var(--cyber-text);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.watchlist-add-btn:hover {
+    background: rgba(76, 201, 240, 0.1);
+    border-color: var(--cyber-blue);
+    transform: translateY(-1px);
+}
+
+.watchlist-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+}
+
+.ticker-item {
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    background: var(--cyber-bg-card);
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ticker-item:hover {
+    background: rgba(77, 201, 240, 0.1);
+    border-color: var(--cyber-blue);
+    transform: translateX(4px);
+}
+
+.ticker-item.active {
+    background: linear-gradient(135deg, var(--cyber-purple) 0%, var(--cyber-blue) 100%);
+    color: #000;
+    font-weight: 700;
+    border-color: var(--cyber-blue);
+    box-shadow: 0 4px 20px var(--cyber-glow);
+}
+
+/* Invalid ticker styling - red glow */
+.ticker-item.ticker-invalid {
+    background: rgba(255, 68, 68, 0.1);
+    border-color: #ff4444;
+    animation: pulse-red 2s ease-in-out infinite;
+}
+
+.ticker-item.ticker-invalid .ticker-symbol {
+    color: #ff4444;
+    font-weight: 700;
+}
+
+.ticker-item.ticker-invalid:hover {
+    background: rgba(255, 68, 68, 0.2);
+    border-color: #ff6666;
+    transform: translateX(4px);
+}
+
+@keyframes pulse-red {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(255, 68, 68, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 68, 68, 0.8);
+    }
+}
+
+/* Watchlist Divider */
+.watchlist-divider {
+    padding: 12px 8px 8px 8px;
+    margin-top: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cyber-text-dim);
+    border-top: 1px solid var(--cyber-border);
+}
+
+/* Ticker Item Layout */
+.ticker-main {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ticker-symbol {
+    font-weight: 600;
+    flex: 1;
+}
+
+.ticker-price {
+    font-size: 11px;
+    font-weight: 500;
+    margin-left: auto;
+}
+
+/* Ticker Star (Priority) */
+.ticker-star {
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--cyber-text-dim);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    line-height: 1;
+    user-select: none;
+}
+
+.ticker-star:hover {
+    color: #ffa726;
+    transform: scale(1.2);
+}
+
+.ticker-star.pinned {
+    color: #ffa726;
+    text-shadow: 0 0 8px rgba(255, 167, 38, 0.6);
+}
+
+/* Ticker Circle (Highlight) */
+.ticker-circle {
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--cyber-text-dim);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    line-height: 1;
+    user-select: none;
+}
+
+.ticker-circle:hover {
+    color: var(--cyber-blue);
+    transform: scale(1.2);
+}
+
+.ticker-circle.highlighted {
+    color: var(--cyber-blue);
+    text-shadow: 0 0 8px rgba(77, 201, 240, 0.6);
+}
+
+/* Ticker Remove Button */
+.ticker-remove {
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--cyber-text-dim);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    line-height: 1;
+    margin-left: 6px;
+    user-select: none;
+}
+
+.ticker-remove:hover {
+    color: var(--cyber-pink);
+    transform: scale(1.2);
+}
+
+/* Center Panel (Chart) */
+.center-panel {
+    flex: 1;
+    background: var(--cyber-bg);
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Allow flex item to shrink */
+    overflow: hidden;
+}
+
+/* Chart Toolbar */
+#chart-toolbar {
+    background: var(--cyber-bg-light);
+    border-bottom: 2px solid var(--cyber-border);
+    padding: 12px 16px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.toolbar-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.toolbar-group label {
+    font-size: 11px;
+    color: var(--cyber-text-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.toolbar-btn {
+    padding: 6px 12px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 6px;
+    color: var(--cyber-text);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 500;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.toolbar-btn span {
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    line-height: 1;
+}
+
+/* Drawing tool buttons – fixed icon grid so all tools feel the same size */
+.tool-btn {
+    width: 32px;
+    height: 28px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbar-btn:hover {
+    background: rgba(77, 201, 240, 0.15);
+    border-color: var(--cyber-blue);
+    box-shadow: 0 0 15px rgba(77, 201, 240, 0.3);
+}
+
+.toolbar-btn.active {
+    background: var(--cyber-purple);
+    color: #fff;
+    border-color: var(--cyber-purple);
+    box-shadow: 0 0 15px var(--cyber-glow);
+}
+
+/* Tooltips */
+.toolbar-btn[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    background: var(--cyber-bg-card);
+    color: var(--cyber-text);
+    font-size: 11px;
+    white-space: nowrap;
+    border-radius: 6px;
+    border: 1px solid var(--cyber-border);
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    pointer-events: none;
+}
+
+.toolbar-select {
+    padding: 8px 12px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 6px;
+    color: var(--cyber-text);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toolbar-select:hover {
+    border-color: var(--cyber-blue);
+}
+
+.toolbar-select option {
+    background: var(--cyber-bg-card);
+    color: var(--cyber-text);
+}
+
+/* Brush Style Controls */
+.brush-style-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 2px 8px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 6px;
+    height: 28px;
+    box-sizing: border-box;
+}
+
+.brush-color-palette {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.brush-color-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--cyber-border);
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.brush-color-swatch:hover {
+    transform: scale(1.1);
+    border-color: var(--cyber-blue);
+}
+
+.brush-color-swatch.active {
+    border-color: #000000;
+    border-width: 3px;
+    outline: 1px solid #000000;
+    outline-offset: -1px;
+}
+
+.brush-size-palette {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding-left: 8px;
+    border-left: 1px solid var(--cyber-border);
+}
+
+.brush-size-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--cyber-border);
+    background: var(--cyber-bg-card);
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.brush-size-dot::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--cyber-text);
+}
+
+.brush-size-dot[data-size="4"]::before {
+    width: 6px;
+    height: 6px;
+}
+
+.brush-size-dot[data-size="6"]::before {
+    width: 8px;
+    height: 8px;
+}
+
+.brush-size-dot:hover {
+    transform: scale(1.1);
+    border-color: var(--cyber-blue);
+    box-shadow: 0 0 8px rgba(77, 201, 240, 0.5);
+}
+
+.brush-size-dot.active {
+    border-color: var(--cyber-blue);
+    border-width: 3px;
+    box-shadow: 0 0 12px rgba(77, 201, 240, 0.7);
+    background: var(--cyber-bg-light);
+}
+
+#chart-container {
+    flex: 1;
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* Trade Panel (Right) */
+.trade-panel {
+    width: 320px;
+    min-width: 280px;
+    max-width: 320px;
+    background: var(--cyber-bg-light);
+    border-left: 2px solid var(--cyber-border);
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.3);
+    flex-shrink: 0; /* Don't shrink */
+}
+
+/* Responsive: Smaller screens */
+@media (max-width: 1200px) {
+    .trade-panel {
+        width: 280px;
+        min-width: 250px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 900px) {
+    .trade-panel {
+        width: 250px;
+        min-width: 220px;
+        padding: 12px;
+        font-size: 12px;
+    }
+}
+
+.trade-section {
+    margin-bottom: 24px;
+}
+
+.trade-section h3 {
+    font-size: 13px;
+    margin-bottom: 14px;
+    color: var(--cyber-blue);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Orders & Positions */
+.orders-summary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.orders-summary div span {
+    color: var(--cyber-text-dim);
+}
+
+.orders-summary strong {
+    color: var(--cyber-green);
+}
+
+.orders-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.orders-tab {
+    flex: 1;
+    padding: 4px 6px;
+    font-size: 11px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--cyber-text);
+}
+
+.orders-tab.active {
+    background: var(--cyber-blue);
+    border-color: var(--cyber-blue);
+    color: #020617;
+}
+
+.orders-list {
+    max-height: 160px;
+    overflow-y: auto;
+    border: 1px solid var(--cyber-border);
+    border-radius: 4px;
+    padding: 4px 6px;
+    background: var(--cyber-bg-card);
+    font-size: 11px;
+}
+
+.orders-empty {
+    text-align: center;
+    color: var(--cyber-text-dim);
+    padding: 8px 0;
+}
+
+.order-row {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr auto;
+    gap: 4px;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    align-items: center;
+}
+
+.order-row:last-child {
+    border-bottom: none;
+}
+
+.order-symbol {
+    font-weight: 600;
+}
+
+.order-side-buy {
+    color: #06ffa5;
+}
+
+.order-side-sell {
+    color: #f72585;
+}
+
+.order-status {
+    font-size: 10px;
+    color: var(--cyber-text-dim);
+}
+
+.order-btn-sell {
+    padding: 2px 4px;
+    font-size: 10px;
+    background: #f72585;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 6px;
+    color: var(--cyber-text-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.auto-exit-toggles {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 16px;
+}
+
+.auto-toggle {
+    font-size: 11px;
+    color: var(--cyber-text-dim);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+}
+
+.auto-toggle input[type="checkbox"] {
+    margin: 0;
+    width: 14px;
+    height: 14px;
+}
+
+.auto-toggle-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 8px;
+    color: var(--cyber-text);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--cyber-blue);
+    box-shadow: 0 0 15px rgba(77, 201, 240, 0.2);
+}
+
+.calc-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.calc-item {
+    background: var(--cyber-bg-card);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--cyber-border);
+}
+
+/* Manual Contract Override Styles */
+#manual-contracts-override {
+    accent-color: #ffab00;
+}
+
+#manual-contracts-input {
+    font-family: 'Helvetica', 'Helvetica Neue', Arial, sans-serif;
+}
+
+#manual-contracts-input:focus {
+    outline: none;
+    border-color: #ffc107;
+    box-shadow: 0 0 8px rgba(255, 171, 0, 0.3);
+}
+
+#manual-contracts-input::-webkit-inner-spin-button,
+#manual-contracts-input::-webkit-outer-spin-button {
+    opacity: 1;
+    height: 30px;
+}
+
+.calc-label {
+    font-size: 10px;
+    color: var(--cyber-text-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.calc-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--cyber-green);
+    margin-top: 4px;
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-buy, .btn-sell {
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-buy::before, .btn-sell::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-buy:hover::before, .btn-sell:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-buy {
+    background: linear-gradient(135deg, var(--cyber-green) 0%, #00ff88 100%);
+    color: #000;
+    box-shadow: 0 4px 20px rgba(6, 255, 165, 0.3);
+}
+
+.btn-buy:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(6, 255, 165, 0.5);
+}
+
+.btn-sell {
+    background: linear-gradient(135deg, var(--cyber-pink) 0%, #ff0066 100%);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(247, 37, 133, 0.3);
+}
+
+.btn-sell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(247, 37, 133, 0.5);
+}
+
+.btn-buy:disabled, .btn-sell:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Logs Panel */
+.logs-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
+    background: var(--cyber-bg-light);
+    border-top: 2px solid var(--cyber-border);
+    overflow-y: auto;
+    padding: 12px 16px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 11px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, opacity 0.2s ease, height 0.2s ease;
+    z-index: 999;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.logs-panel.collapsed {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Console resize handle (drag up/down to resize) */
+#console-resize-handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    cursor: ns-resize;
+    background: transparent;
+}
+
+#toggle-console-btn {
+    position: fixed;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 16px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 6px 6px 0 0;
+    color: var(--cyber-text);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1001;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+#toggle-console-btn:hover {
+    background: rgba(77, 201, 240, 0.15);
+    border-color: var(--cyber-blue);
+    box-shadow: 0 4px 16px rgba(77, 201, 240, 0.3);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.log-entry {
+    margin-bottom: 4px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.log-time {
+    color: var(--cyber-text-dim);
+    margin-right: 8px;
+}
+
+.log-entry.error, .log-error {
+    color: var(--cyber-pink);
+    background: rgba(247, 37, 133, 0.1);
+}
+
+.log-entry.success, .log-success {
+    color: var(--cyber-green);
+    background: rgba(6, 255, 165, 0.1);
+}
+
+.log-entry.info, .log-info {
+    color: var(--cyber-blue);
+    background: rgba(77, 201, 240, 0.1);
+}
+
+/* Login Modal */
+#login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.login-box {
+    background: var(--cyber-bg-light);
+    padding: 30px;
+    border-radius: 16px;
+    width: 360px;
+    border: 2px solid var(--cyber-border);
+    box-shadow: 0 8px 40px rgba(157, 78, 221, 0.3);
+}
+
+.login-box h2 {
+    margin-top: 0;
+    color: var(--cyber-blue);
+    text-align: center;
+    font-size: 24px;
+}
+
+.login-box input {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: var(--cyber-bg-card);
+    border: 1px solid var(--cyber-border);
+    color: var(--cyber-text);
+    border-radius: 8px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: var(--cyber-blue);
+    box-shadow: 0 0 15px rgba(77, 201, 240, 0.2);
+}
+
+.login-box button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--cyber-purple) 0%, var(--cyber-blue) 100%);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.login-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px var(--cyber-glow);
+}
+
+/* Mode Selector Buttons */
+.mode-select-btn {
+    user-select: none;
+}
+
+.mode-select-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+}
+
+.mode-select-btn:active {
+    transform: translateY(0);
+}
+
+/* Disclaimer */
+.disclaimer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(10, 14, 39, 0.9);
+    padding: 10px 14px;
+    color: var(--cyber-text-dim);
+    font-size: 10px;
+    pointer-events: none;
+    max-width: 300px;
+    text-align: right;
+    z-index: 100;
+    border: 1px solid var(--cyber-border);
+    border-radius: 8px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cyber-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--cyber-purple);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--cyber-blue);
+}
+
+/* ============================================
+   TRADE PANEL EDITOR MODE & DRAG HANDLES
+   ============================================ */
+
+/* Trade panel header for editor buttons */
+.trade-panel-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--cyber-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Section drag handle (☰) */
+.section-handle {
+    display: none;
+    cursor: grab;
+    font-size: 18px;
+    color: var(--cyber-text-dim);
+    margin-left: 8px;
+    padding: 4px 8px;
+    user-select: none;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 10;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 4px;
+}
+
+.section-handle:hover {
+    color: var(--cyber-blue);
+    background: rgba(56, 189, 248, 0.2);
+    transform: scale(1.05);
+}
+
+.section-handle:active {
+    cursor: grabbing;
+    background: rgba(56, 189, 248, 0.3);
+}
+
+/* Section close button (✕) */
+.section-close {
+    display: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--cyber-text-dim);
+    margin-left: 6px;
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.section-close:hover {
+    color: var(--cyber-pink);
+    background: rgba(225, 29, 72, 0.1);
+    transform: scale(1.05);
+}
+
+/* Section collapse button (▾) */
+.section-collapse {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--cyber-text-dim);
+    margin-left: auto;
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.section-collapse:hover {
+    color: var(--cyber-blue);
+    background: rgba(56, 189, 248, 0.1);
+}
+
+/* Show handles and controls in editor mode */
+.trade-panel.editor-mode .section-handle {
+    display: inline-block;
+}
+
+.trade-panel.editor-mode .section-close {
+    display: inline-block;
+}
+
+.trade-panel.editor-mode .trade-section {
+    cursor: move;
+    border: 2px dashed var(--cyber-border);
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.03);
+    transition: all 0.2s ease;
+}
+
+.trade-panel.editor-mode .trade-section:hover {
+    border-color: var(--cyber-blue);
+    background: rgba(56, 189, 248, 0.08);
+}
+
+.trade-panel.editor-mode .trade-section.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+/* ============================================
+   ACCOUNT SUMMARY (KPI CARDS) - REDESIGNED
+   ============================================ */
+
+.kpi-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.kpi-card {
+    background: linear-gradient(135deg, var(--cyber-bg-card) 0%, rgba(56, 189, 248, 0.05) 100%);
+    border: 1px solid var(--cyber-border);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--cyber-blue);
+}
+
+.kpi-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cyber-text-dim);
+    font-weight: 600;
+}
+
+.kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--cyber-text);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Specific card colors */
+.kpi-card.kpi-cash::before {
+    background: var(--cyber-blue);
+}
+
+.kpi-card.kpi-pl-today::before {
+    background: var(--cyber-green);
+}
+
+.kpi-card.kpi-open-pnl::before {
+    background: var(--cyber-purple);
+}
+
+/* Color-coded values based on positive/negative */
+.kpi-value.positive {
+    color: var(--cyber-green);
+}
+
+.kpi-value.negative {
+    color: var(--cyber-pink);
+}
+
