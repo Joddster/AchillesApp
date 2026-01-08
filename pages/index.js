@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function Home() {
@@ -259,19 +260,22 @@ export default function Home() {
       </div>
 
       {/* Load scripts after DOM - order matters! */}
-      <script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
-      <script src="/js/electron-shim.js"></script>
-      <script src="/js/webull-rsa-browser.js"></script>
-      <script src="/js/webull-api-browser.js"></script>
-      <script src="/js/polygon-api-browser.js"></script>
-      <script src="/js/effective-delta-engine.js"></script>
-      <script src="/js/chart.js"></script>
-      <script src="/js/chart-tools.js"></script>
-      <script src="/js/trade-logic.js"></script>
-      <script src="/js/slippage-exit-engine.js"></script>
-      <script src="/js/option-fetcher-browser.js"></script>
-      <script src="/js/webull-candles-poller-browser.js"></script>
-      <script src="/js/app-browser.js"></script>
+      <Script 
+        src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"
+        strategy="beforeInteractive"
+      />
+      <Script src="/js/electron-shim.js" strategy="afterInteractive" />
+      <Script src="/js/webull-rsa-browser.js" strategy="afterInteractive" />
+      <Script src="/js/webull-api-browser.js" strategy="afterInteractive" />
+      <Script src="/js/polygon-api-browser.js" strategy="afterInteractive" />
+      <Script src="/js/effective-delta-engine.js" strategy="afterInteractive" />
+      <Script src="/js/chart.js" strategy="afterInteractive" />
+      <Script src="/js/chart-tools.js" strategy="afterInteractive" />
+      <Script src="/js/trade-logic.js" strategy="afterInteractive" />
+      <Script src="/js/slippage-exit-engine.js" strategy="afterInteractive" />
+      <Script src="/js/option-fetcher-browser.js" strategy="afterInteractive" />
+      <Script src="/js/webull-candles-poller-browser.js" strategy="afterInteractive" />
+      <Script src="/js/app-browser.js" strategy="afterInteractive" />
     </>
   );
 }
