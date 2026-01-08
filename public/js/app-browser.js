@@ -1,15 +1,22 @@
-// Browser environment - use global objects instead of require()
-const ipcRenderer = window.ipcRenderer; // From electron-shim.js
-const WebullAPI = window.WebullAPI; // From webull-api-browser.js
-const api = new WebullAPI();
-const webullCandlesPoller = window.WebullCandlesPoller ? new window.WebullCandlesPoller() : null;
-const ChartManager = window.ChartManager; // From chart.js
-const tradeLogic = window.tradeLogic; // From trade-logic.js
-const EffectiveDeltaEngine = window.EffectiveDeltaEngine; // From effective-delta-engine.js
-const ChartTools = window.ChartTools; // From chart-tools.js
-const OptionFetcher = window.OptionFetcher; // From option-fetcher-browser.js
-const SlippageExitEngine = window.SlippageExitEngine; // From slippage-exit-engine.js
-const optionPricePollerDebug = null; // Disabled in browser
+// Browser environment - modules loaded from window (global scope)
+// Using window.* objects directly to avoid redeclaration errors
+(function() {
+  // Avoid polluting global scope - use window.* objects directly in code
+  window.appApi = new window.WebullAPI();
+  window.appWebullCandlesPoller = window.WebullCandlesPoller ? new window.WebullCandlesPoller() : null;
+})();
+
+// Local references for backward compatibility with existing code
+var ipcRenderer = window.ipcRenderer;
+var api = window.appApi || new window.WebullAPI();
+var webullCandlesPoller = window.appWebullCandlesPoller;
+var ChartManager = window.ChartManager;
+var tradeLogic = window.tradeLogic;
+var EffectiveDeltaEngine = window.EffectiveDeltaEngine;
+var ChartTools = window.ChartTools;
+var OptionFetcher = window.OptionFetcher;
+var SlippageExitEngine = window.SlippageExitEngine;
+var optionPricePollerDebug = null;
 
 // Global option fetcher instance (initialized when credentials are available)
 let optionFetcher = null;
